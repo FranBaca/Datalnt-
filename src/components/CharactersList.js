@@ -8,13 +8,27 @@ import Container from "react-bootstrap/Container"
 import "./CharacterList.css"
 export default function CharactersList() {
   const [characters,setCharacters] = useState([])
-
+  let [page,setPage]  =useState(1)
   async function fetchCharacters(){
-    let res = await fetch("https://swapi.dev/api/people/?format=json")
+    let res = await fetch(`https://swapi.dev/api/people/?page=${page}`)
     let data = await res.json()
    setCharacters(data.results);
   }
   
+  const handleClickNext=()=>{
+        
+    if(page+1 < 36){
+        setPage(page+=1)
+        fetchCharacters(page+=1)
+    }
+}
+
+const handleClickBack=()=>{
+    if(page-1 >= 0){
+        setPage(page-1)
+       fetchCharacters(page-1)
+    }
+}
   useEffect(() => {
     fetchCharacters()
   }, [])
@@ -28,12 +42,17 @@ export default function CharactersList() {
         <Card.Title>{c.name}</Card.Title>
         <Card.Text>Birth: {c.birth_year} </Card.Text>
         <Card.Text>Gender: {c.gender} </Card.Text>
-        <Card.Text>Height: {c.height} </Card.Text>
+        <Card.Text>Height: {c.species} </Card.Text>
         <Button variant="primary">Learn more</Button>
       </Card.Body>
     </Card>
       )
     })}
+
+<div style={{marginTop:"35px" }}>
+                <button style={{backgroundColor:"#ADCBB6", borderRadius:"25px",cursor:"pointer"}} onClick={handleClickBack}> go</button>
+                <button style={{backgroundColor:"#8AAABC", borderRadius:"25px",cursor:"pointer"}} onClick={handleClickNext} >next </button>
+            </div>
    </div>
   )
 }
