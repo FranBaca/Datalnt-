@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import {useState,useEffect} from "react"
+import { Button } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css"
+import Nav from "./components/Nav.js"
+import { Route,Routes } from "react-router-dom";
+import CharactersList from "./components/CharactersList.js";
+import CharacterCard from "./components/CharacterCard.js";
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav/>
+      <Routes>
+    <Route path="/" element={<CharactersList/>} />
+    <Route path="/charDetail/:id" {...props} element={<CharacterCard/>} />
+    </Routes>
     </div>
   );
 }
