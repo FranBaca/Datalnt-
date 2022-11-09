@@ -3,7 +3,7 @@ Declaration of two routes and displaying of Navbar
 
 # Main component CharacterList.js
 
-UseEffect to call action that brings the data of the characters, then displays the characters throw a map function and Bootstrap's cards. 
+UseEffect to call action that brings the data of the characters, then displays the characters using a map function and Bootstrap's cards. 
 
 Using react-redux the state declared in the reducer updates when the action gets called in the characterlist component, depending on the condtion set, the state will update with the corresponding information
 
