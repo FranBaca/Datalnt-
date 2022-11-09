@@ -1,7 +1,8 @@
-import {character} from '../actions/index';
+import {character,homeworld} from '../actions/index';
 
 const initialState = {
-    characters: []
+    characters: [],
+    homeworld: [],
 };
 
 
@@ -12,6 +13,11 @@ export default function Reducer(state=initialState,action) {
             return{
                 ...state,
                 characters:action.payload
+            }
+        case homeworld:
+            return{
+                ...state,
+                homeworld:action.payload
             }
     default: return state
     }
