@@ -1,5 +1,3 @@
-import {useState,useEffect} from "react"
-import { Button } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Nav from "./components/Nav.js"
 import { Route,Routes } from "react-router-dom";

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { fetchCharacters } from '../actions';
+import { Link } from 'react-router-dom';
 
 export default function NavbarComponent() {
   const [name, setName]=useState("")
@@ -25,12 +26,12 @@ export default function NavbarComponent() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
+        <Link to="/">
         <Navbar.Brand href="#home"><img src="/logo.png" alt="" style={{width:"100px"}}/></Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home"  bg="light">Characters</Nav.Link>
-            <Nav.Link href="#link">Planets</Nav.Link>
             <form className="d-flex"  onSubmit={handleSubmit}>
             <Form.Control
               type="search"
