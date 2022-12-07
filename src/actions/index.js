@@ -1,44 +1,53 @@
 import axios from "axios"
+const url = process.env.REACT_APP_API_URL
 
-export const character = "GET_CHARACTERS"
-export const homeworld = "GET_HOMEWORLD"
-
-export const fetchCharacters=(name,page,id) =>{
-    return async(dispatch)=>{
-        if(name){
-            var character = await axios.get(`https://swapi.dev/api/people/?search=${name}`)
-        }
-        else if(page) {
-             character = await axios.get(`https://swapi.dev/api/people/?page=${page}`)
-        }else if(id){
-            character = await axios.get(`https://swapi.dev/api/people/${id}`)
-        }else{
-            character = await axios.get(`https://swapi.dev/api/people/?format=json`)
-        }
-        dispatch(actionDispatcherChars(character.data))
-    }
+export async function fetchCharacter (name) {
+  console.log(name)
+    try {
+        let res = await axios.get(`${url}/?search=${name}`)
+        let data = res.data.results;
+        return data
+      } catch (error) {
+        console.log(error.response); //
+        return error.response;
+      }
     
 }
 
-const actionDispatcherChars=(payload)=>{
-    return {
-        type: character,
-        payload
-    }
+export async function allCharactersFetch () {
+    try {
+        let res = await axios.get(`${url}/?format=json`)
+        let data = res.data.results;
+        return data
+      } catch (error) {
+        console.log(error.response); //
+        return error.response;
+      }
+
+    
 }
 
-
-export const fetchHomeworld = (character) => { 
-    return async (dispatch) => {
-        const homeworld = await axios.get(`${character.results[0].homeworld}`)
-        console.log(homeworld)
-        dispatch(actionDispatcherHomeWorld(homeworld))
-    }
+export async function  paginationFetch (page) {
+    try {
+        let res = await axios.get(`${url}/?page=${page}`)
+        let data = res.data.results;
+        return data
+      } catch (error) {
+        console.log(error.response); //
+        return error.response;
+      }
+    
 }
 
-const actionDispatcherHomeWorld=(payload)=>{
-    return {
-        type: homeworld,
-        payload
-    }
+export async function  fetchCharacterByID (id) {
+  console.log(id)
+    try {
+        let res = await axios.get(`${url}/${id}`)
+        let data = res.data;
+        return data
+      } catch (error) {
+        console.log(error.response); 
+        return error.response;
+      }
+    
 }
